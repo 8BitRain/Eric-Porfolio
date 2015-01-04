@@ -81,12 +81,13 @@
 		position: fixed;
 		width: 105%;
 		/*Was previously 90% and had a nice effect */
-		height: 105%;
+		/*height: 105%;*/
+		height: 95%;
 		top: 0px;
 		right: 0px;
 		margin-top: -10px;
 		margin-right: -10px;
-		-webkit-filter: blur(4px);
+		/*-webkit-filter: blur(4px);*/
 		/*position: relative;*/
 		/*margin: 0px auto;*/
 	}
@@ -162,14 +163,16 @@
 		text-align: left;
 		background: none;
 		width: 100%;
+		/*-webkit-transition: 1s ease-in-out;*/
 	}
 
 	.titles ul{
 		padding-left: 0px;
 	}
 
-	.titles  a:hover{
-		background: black;
+	.titles  li:hover{
+
+		/*-webkit-transform: skewY(.6deg);*/
 	}
 
 	.toNextPage {
@@ -180,6 +183,7 @@
 		right: 0;
 		z-index: 2;
 		top: 90%;
+		opacity: .6;
 	}
 	.aboutPage{
 		position: absolute;
@@ -302,7 +306,7 @@
 		<li id="artDevTitle"><h1>Artist</h1></li>
 	</ul>
 	</div>
-	<img class="toNextPage" src="images/down128.png">
+	<img class="toNextPage" src="images/down128white.png">
 	<div class="leftNav" id="leftNav">
 			<table>
 				<tr>
@@ -332,7 +336,6 @@
 	<div id="aboutPage" class="aboutPage">
 			<div class="aStatement" id="aStatement">
 			</div>
-			<img id="gFlies" src="images/GarrettFlies.jpg">
 	</div> 
 </div>
 <!-- <div id="content"> 
@@ -376,7 +379,7 @@
 			$("#webDevTitle").animate({
 				paddingTop: 0,
 				paddingBottom: 0
-			}, 200, "easeOutCubic");
+			}, 100, "easeOutCubic");
 		});
 
 		$("#gameDevTitle").hover(function(){
@@ -392,7 +395,7 @@
 			$("#gameDevTitle").animate({
 				paddingTop: 0,
 				paddingBottom: 0
-			}, 200, "easeOutCubic");
+			}, 100, "easeOutCubic");
 		});
 
 		$("#historyDevTitle").hover(function(){
@@ -408,7 +411,7 @@
 			$("#historyDevTitle").animate({
 				paddingTop: 0,
 				paddingBottom: 0
-			}, 200, "easeOutCubic");
+			}, 100, "easeOutCubic");
 		});
 
 		$("#artDevTitle").hover(function(){
@@ -424,7 +427,7 @@
 			$("#artDevTitle").animate({
 				paddingTop: 0,
 				paddingBottom: 0
-			}, 200, "easeOutCubic");
+			}, 100, "easeOutCubic");
 		});
 
 		/*======================== WELCOME PAGE ANIMATION ======================*/
@@ -612,7 +615,7 @@
 	    	}, 1200)
 	    	//Scroll Background image
 	    	$('#pOverlay').animate({
-	    		height: "105%",
+	    		height: "95%",
 	    		backgroundPositionY: 5
 	    	}, 1200,  function(){
 	    		waypointNameHit = false;
