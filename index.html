@@ -1,6 +1,7 @@
 
 
 <link href='http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 <script src="plugins/noframework.waypoints.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -9,6 +10,39 @@
 
 
 <style type="text/css">
+	.welcomePage{
+		background: black;
+		width: 100%;
+		height: 100%;
+		z-index: 3;
+		position: absolute;
+		top: 0;
+	}
+
+	.welcomePage h1{
+		position: absolute;
+		top: 25%;
+		left: 0;
+		right: 0;
+		text-align: center;
+		letter-spacing: 8;
+		text-transform: uppercase;
+		font-size: 5em;
+		/*font-family: 'Sorts Mill Goudy', serif;*/
+		font-family: 'Lato', sans-serif;
+		color: honeydew;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		/*animate to move to 35% */
+	}
+	.welcomeContainer{
+		position: absolute;
+		top: 40%;
+		width: 100%;
+		height: 25%;
+		overflow: hidden;
+	}
+
 	.landingPageWrapper{
 		position: relative;
 	}
@@ -84,7 +118,8 @@
 		top: 25%;
 		/*22em*/
 		/*opacity: .6;*/
-		font-family: 'Sorts Mill Goudy', serif;
+		/*font-family: 'Sorts Mill Goudy', serif;*/
+			font-family: 'Lato', sans-serif;
 	}
 
 	.mainContent{
@@ -99,15 +134,17 @@
 		/*top 25%*/
 		padding-top: 1.5%;
 		padding-bottom: 25;
-		background: rgb(45, 42, 42);
+		/*background: rgb(45, 42, 42);*/
 		opacity: .9;
 		/*Was previously 32% */
-		top: 50%;
+		top: 35%;
 		font-weight: 100;
 		letter-spacing: 8;
-		font-size: 30px;
+		font-size: 20px;
 		text-transform: uppercase;
-		font-family: 'Sorts Mill Goudy', serif;
+		color: white;
+		/*font-family: 'Sorts Mill Goudy', serif;*/
+		font-family: 'Lato', sans-serif;
 	}
 
 	.titles table, tr{
@@ -118,6 +155,32 @@
 		color: white;
 	}
 
+	.titles li{
+		padding-top: 0;
+		list-style: none;
+		cursor: pointer;
+		text-align: left;
+		background: none;
+		width: 100%;
+	}
+
+	.titles ul{
+		padding-left: 0px;
+	}
+
+	.titles  a:hover{
+		background: black;
+	}
+
+	.toNextPage {
+		position: absolute;
+		margin-right: auto;
+		margin-left: auto;
+		left: 0;
+		right: 0;
+		z-index: 2;
+		top: 90%;
+	}
 	.aboutPage{
 		position: absolute;
 		top: 100%;
@@ -206,23 +269,40 @@
 
 
 
-
+<div class="welcomePage" id="welcomePage">
+	<div class="welcomeContainer" id="welcomeContainer">
+			<h1 id="welcomeTitle">Front/Backend Web Developer.</h1>	
+	</div>
+</div>
 <div class="header" id="pOverlay">
 	<!-- <img class="gradient_test" id="gradient_test" src="images/hexagon_overlay.png"> -->
 </div>
 <div  class="content">
 	<h1  id="name-waypoint" class="nameWrapper"> Eric Smith </h1>
 	<div class="titles" id="titles">
-		<table>
+		<!-- <table>
 			<thead>
 				<tr>
-					<th style="width: 35%;"><h1>Front/Backend Web Developer</h1></th>
+					<th><h1>Front/Backend Web Developer</h1></th>
+
+				</tr>
+				<tr>
 					<th><h1>Game Developer</h1></th>
-					<th style="width: 35%;"><h1>Artist</h1></th>
+				</tr>
+				<tr>
+					<th><h1>Artist</h1></th>
 				</tr>
 			</thead>
-		</table>
+
+		</table>-->
+	<ul>
+		<li id="webDevTitle"><h1>Front/Backend Web Developer</h1></li>
+		<li id="gameDevTitle"><h1>Game Developer</h1></li>
+		<li id="historyDevTitle"><h1>History Scholar</h1></li>
+		<li id="artDevTitle"><h1>Artist</h1></li>
+	</ul>
 	</div>
+	<img class="toNextPage" src="images/down128.png">
 	<div class="leftNav" id="leftNav">
 			<table>
 				<tr>
@@ -251,7 +331,6 @@
 	</div>
 	<div id="aboutPage" class="aboutPage">
 			<div class="aStatement" id="aStatement">
-					<p> Garrett is a poet and dancer who uses an introspective lens to examine interracial relationships, white privilege, and standards of masculinity. Having an identity as a lower class white man from a multicultural family affords Garrett a non-traditional perspective. He creates multimedia projects that fuse unique perspectives to harbor critical dialogue. </p>
 			</div>
 			<img id="gFlies" src="images/GarrettFlies.jpg">
 	</div> 
@@ -282,10 +361,164 @@
 		p1.style.position = "fixed";
 	}*/
 	window.onload = checkBotPosition;
+
+	//Hovering Cover Page Links
+	$(document).ready(function(){
+		$("#webDevTitle").hover(function(){
+			$("#webDevTitle").css("background-color", "rgb(45, 42, 42)");
+			$("#webDevTitle").animate({
+				paddingTop: 20,
+				paddingBottom: 20
+			}, 200, "easeOutCubic");
+
+		}, function(){
+			$("#webDevTitle").css("background-color", "transparent");
+			$("#webDevTitle").animate({
+				paddingTop: 0,
+				paddingBottom: 0
+			}, 200, "easeOutCubic");
+		});
+
+		$("#gameDevTitle").hover(function(){
+			$("#gameDevTitle").css("background-color", "rgb(45, 42, 42)");
+
+			$("#gameDevTitle").animate({
+				paddingTop: 20,
+				paddingBottom: 20
+			}, 200, "easeOutCubic");
+		}, function(){
+			$("#gameDevTitle").css("background-color", "transparent");
+
+			$("#gameDevTitle").animate({
+				paddingTop: 0,
+				paddingBottom: 0
+			}, 200, "easeOutCubic");
+		});
+
+		$("#historyDevTitle").hover(function(){
+			$("#historyDevTitle").css("background-color", "rgb(45, 42, 42)");
+
+			$("#historyDevTitle").animate({
+				paddingTop: 20,
+				paddingBottom: 20
+			}, 200, "easeOutCubic");
+		}, function(){
+			$("#historyDevTitle").css("background-color", "transparent");
+
+			$("#historyDevTitle").animate({
+				paddingTop: 0,
+				paddingBottom: 0
+			}, 200, "easeOutCubic");
+		});
+
+		$("#artDevTitle").hover(function(){
+			$("#artDevTitle").css("background-color", "rgb(45, 42, 42)");
+
+			$("#artDevTitle").animate({
+				paddingTop: 20,
+				paddingBottom: 20
+			}, 200, "easeOutCubic");
+		}, function(){
+			$("#artDevTitle").css("background-color", "transparent");
+
+			$("#artDevTitle").animate({
+				paddingTop: 0,
+				paddingBottom: 0
+			}, 200, "easeOutCubic");
+		});
+
+		/*======================== WELCOME PAGE ANIMATION ======================*/
+		setTimeout(loopInitTitle, 2000);
+
+		function loopInitTitle(){
+			$("#welcomeTitle").animate({
+				top: "-37%"
+			}, 400, function(){
+			$("#welcomeTitle").remove();
+			});
+		}
+
+		var finesseSet =["Game Developer.", "History Scholar.", "Artist."];
+		var loopPos = 0;
+		var loopTime = 2500;
+		var scrollCntrSpd = 400;
+		var scrollCntrStay = 200;
+		var scrollTopSpd = 400;
+		var isWelcomeAnimDone = false;
+		setTimeout(loopTitles, loopTime);
+
+		function loopTitles(){
+
+			//Debug
+			//console.log(loopPos);
+			
+			//Create header element with title info
+			var h = document.createElement("H1");
+			var t = document.createTextNode(finesseSet[loopPos]);
+			h.setAttribute("id", "welcomeTitle");
+			h.appendChild(t);
+			document.getElementById("welcomeContainer").appendChild(h);
+			h.style.top = "100%";
+
+			var nextTitleTransition = scrollTopSpd + scrollCntrStay + scrollCntrSpd + 300;
+			//Animate the header element to center
+			console.log("Element created");
+			loopTime = nextTitleTransition;
+			$("#welcomeTitle").animate({
+				top: "25%"
+			}, scrollCntrSpd, function(){
+				console.log("Animating Title");
+				setTimeout(scrollTitleUp, scrollCntrStay + 500);
+				if(loopPos < finesseSet.length - 1)
+				{
+					console.log(loopTime);
+					loopPos++;
+					setTimeout(loopTitles, loopTime);
+				}
+				else
+				{
+					isWelcomeAnimDone = true;
+				}
+				
+			});
+
+
+			//alert("Appending Text");
+			
+			//Doing this to account for the init image that needs to be scrolled up.
+			//loopTime = 2400;
+			/*if(loopPos > finesseSet.length - 1)
+			{
+				destroyInterval();
+			}*/
+		}
+
+		function scrollTitleUp(){
+			console.log(loopPos);
+			$("#welcomeTitle").animate({
+				top: "-37%"
+			}, scrollTopSpd, function(){
+			$("#welcomeTitle").remove();
+			});
+			if(isWelcomeAnimDone)
+			{
+				console.log("Finished Welcome Page Animation");
+				$("#welcomePage").fadeOut(500);
+			}
+		}
+
+		function destroyInterval(){
+			clearTimeout(titleLoop);
+
+		}
+
+	});
+
+	
+
   function checkBotPosition(){
   	var p1 = document.getElementById("pOverlay");
   	var position = p1.style.backgroundPosition;
-	
   }
 
   function parseBackgroundPosY(backPos){
@@ -301,45 +534,6 @@
   	 return posY;
   }
 
-  /*function parallax(){
-  	var p1 = document.getElementById("pOverlay");
-  	var content = document.getElementById("main-content");
-  	var position = p1.style.backgroundPosition;
-  	yValue = parseBackgroundPosY(position);
-  	//console.log("Value of y: " + yValue );
-  	if(parseBackgroundPosY(position) <= 100)
-  	{
-  		//console.log("Switching background parse position");
-  	}
-  	//console.log("This is the current backgroundPosition position " + position);
-
-  	var scrollSpeed;
-
-  	//var scrollOffset = window.pageYOffset;
-  	//Used because well for some reason background image position has no initial state -_-
-  	if(initScroll == false)
-  	{
-  		console.log("Calling initScroll")
-  		//p1.style.backgroundPosition =   "0" + " " + String(-window.pageYOffset);
-  		console.log("InitScrolled By: " + p1.scrollTop);
-  		initScroll = true;
-  	}
-  	
-  	if(initScroll == true)
-  	{
-  	if(parseBackgroundPosY(position) > -366){
-  	//p1.style.backgroundPosition =   "0" + " " + String(-window.pageYOffset);	
-  	console.log("Current height: " + p1.style.height.length);
-  	initHeight = initHeight - 20;
-  	p1.style.height = initHeight  + "px";
-  	console.log("Scrolled By: " + p1.scrollTop);
-  	}
-  	}
-  	
-  	//p1.style.bottom = 270 + window.pageYOffset + "px";
-  	//return false;
-  }
-  //window.addEventListener("mousewheel", parallax, false);*/
 
   //Using Waypoints
   var waypointNameHit = false;
@@ -404,7 +598,7 @@
 	 		console.log("Scrolling Up");
 	 		//$("#pOverlay").finish();
 	 		//Hide the navigation panel
-	    	$('#leftNav').fadeOut(200);
+	    	//$('#leftNav').fadeOut(200);
 	    	$('#aStatement').fadeOut(200);
 	 		$('html,body').animate({
 	        	scrollTop: 0
@@ -461,7 +655,7 @@
 	    		waypointNameHit = true;
 	    		canCheckMouse = true;
 	    		//Display the navigation panel
-	    		$('#leftNav').fadeTo('slow', .5);
+	    		//$('#leftNav').fadeTo('slow', .5);
 	    		$('#aStatement').fadeTo('slow', .9);
 	    		pageState = 1;	
 	    	});
