@@ -174,7 +174,9 @@
 
 		/*-webkit-transform: skewY(.6deg);*/
 	}
-
+	.spriteAnim{
+		position: absolute;
+	}
 	.toNextPage {
 		position: absolute;
 		margin-right: auto;
@@ -314,6 +316,7 @@
 		<li id="historyDevTitle"><h1>History Scholar</h1></li>
 		<li id="artDevTitle"><h1>Artist</h1></li>
 	</ul>
+	<img class="spriteAnim" src="images/NoraRedesignTransparent.png">
 	</div>
 	<img class="toNextPage" src="images/down128white.png">
 	<div class="leftNav" id="leftNav">
@@ -362,9 +365,12 @@
 	var initScroll = false;
 	var initHeight = 500;
 	var initCheckNameWaypoint = false;
+	//Relates to specific times we can check mouse scrolls. Using this to scrolljack
 	var canCheckMouse = true;
 	var mousewheelValue = 0;
-
+	var isWelcomeAnimDone = false;
+	//Relates to whether or not we can scroll at all.
+	var canScroll = false;
 
 	//Page state defines what page the user is currently at. 0 represents the landing page
 	var pageState = 0;
@@ -458,7 +464,7 @@
 		var scrollCntrSpd = 400;
 		var scrollCntrStay = 200;
 		var scrollTopSpd = 400;
-		var isWelcomeAnimDone = false;
+
 		setTimeout(loopTitles, loopTime);
 
 		function loopTitles(){
@@ -517,7 +523,9 @@
 			if(isWelcomeAnimDone)
 			{
 				console.log("Finished Welcome Page Animation");
-				$("#welcomePage").fadeOut(500);
+				$("#welcomePage").fadeOut(500, function(){
+					canScroll = true;
+				});
 			}
 		}
 
@@ -621,9 +629,9 @@
 	    		canCheckMouse = true;
 	    	});
 	 		//Change the width of the waypoint for scrolling up
-	    	$('#name-waypoint').animate({
+	    	/*$('#name-waypoint').animate({
 	    		width: "10em"
-	    	}, 1200)
+	    	}, 1200)*/
 	    	//Scroll Background image
 	    	$('#pOverlay').animate({
 	    		height: "105%",
@@ -658,9 +666,9 @@
 	    		canCheckMouse = true;
 	    	});
  			//Change the width of the waypoint for scrolling down
-	    	$('#name-waypoint').animate({
+	    	/*$('#name-waypoint').animate({
 	    		width: "15em"
-	    	}, 1200)
+	    	}, 1200)*/
 	    	$('#pOverlay').animate({
 	    		//Change to 10% for banner effect
 	    		height: "10%",
@@ -698,42 +706,46 @@
 function fadeOutTitle(){
 	//if(pageState == 0)
 	//{
-		$('#titles').fadeTo('fast', 1);
+		//$('#titles').fadeTo('fast', 1);
 		$('#titles').fadeOut(600);
+		$("#name-waypoint").fadeOut(600);
 	//}
 }
 function fadeInTitle(){
 	//if(pageState == 1)
 	//{
 		$('#titles').fadeTo('1200', .9);
+		$("#name-waypoint").fadeIn(600);
 		//$('#titles').fadeIn(1200);
 	//}
 }
 
 //Handles the events for Chrome/Safari. They both use -webkit
 $(window).on('mousewheel DOMMouseScroll', function(e){
- 	if(pageState == 0)
- 	{
- 	 //Scrolling down to state 0
-  	 parallax_scroll(e);
-  	 if(e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0)
-  	 {
-  	 	fadeOutTitle();
-  	 }
-  	/* else
-  	 {
-  	 	fadeInTitle();
-  	 }*/
-  	}
-  	if(pageState == 1)
-  	{
-  		 if(e.originalEvent.wheelDelta > 0 || e.originalEvent.detail  < 0)
-  		 {
-  		 	//Scrolling up to state 0. That is handled in this function
-  		 	 parallax_scroll(e);
-  		 	 //fadeInTitle();
-  		 }
-  	}
+	if(canScroll){
+	 	if(pageState == 0)
+	 	{
+	 	 //Scrolling down to state 0
+	  	 parallax_scroll(e);
+	  	 if(e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0)
+	  	 {
+	  	 	fadeOutTitle();
+	  	 }
+	  	/* else
+	  	 {
+	  	 	fadeInTitle();
+	  	 }*/
+	  	}
+	  	if(pageState == 1)
+	  	{
+	  		 if(e.originalEvent.wheelDelta > 0 || e.originalEvent.detail  < 0)
+	  		 {
+	  		 	//Scrolling up to state 0. That is handled in this function
+	  		 	 parallax_scroll(e);
+	  		 	 //fadeInTitle();
+	  		 }
+	  	}
+  }
 });
 //Handles the scrolling for Firefox since it uses a different call for mousewheel
 
