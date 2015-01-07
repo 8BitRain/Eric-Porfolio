@@ -6,9 +6,9 @@
 <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="plugins/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/velocity/1.2.1/velocity.min.js"></script>
 
-
-
+<head>
 <style type="text/css">
 	.welcomePage{
 		background: black;
@@ -279,8 +279,35 @@
     display: none; 
 	}
 
+	/*Media Queries for Mobile iPhones */
+	@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and ( orientation : portrait) {
+	 /* STYLES GO HERE */ 
+  		.nameWrapper {
+  			top: 0;
+
+  		}
+
+  		.titles{
+  			top: 15%;
+  			font-size: .8em;
+  			color: honeydew;
+  		}
+  		
+  		.contactInfo{
+  			top: 80%;
+  			height: 20%;
+  		}
+
+  		.welcomeContainer h1{
+  			font-size: 1.65em;
+  		}
+	}
 
 </style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
 
 
 
@@ -375,6 +402,9 @@
 	//Page state defines what page the user is currently at. 0 represents the landing page
 	var pageState = 0;
 
+	/*====== WATCHING CSS MEDIA QUERIES ========= */
+	 var mobile = window.matchMedia("only screen and (min-device-width : 320px) and (max-device-width : 568px) and ( orientation : portrait)"); 
+
 	/*if(fixPosition == true)
 	{
 		var p1 = document.getElementById("pOverlay");
@@ -386,14 +416,14 @@
 	$(document).ready(function(){
 		$("#webDevTitle").hover(function(){
 			$("#webDevTitle").css("background-color", "rgb(45, 42, 42)");
-			$("#webDevTitle").animate({
+			$("#webDevTitle").velocity({
 				paddingTop: 20,
 				paddingBottom: 20
 			}, 200, "easeOutCubic");
 
 		}, function(){
 			$("#webDevTitle").css("background-color", "transparent");
-			$("#webDevTitle").animate({
+			$("#webDevTitle").velocity({
 				paddingTop: 0,
 				paddingBottom: 0
 			}, 100, "easeOutCubic");
@@ -402,14 +432,14 @@
 		$("#gameDevTitle").hover(function(){
 			$("#gameDevTitle").css("background-color", "rgb(45, 42, 42)");
 
-			$("#gameDevTitle").animate({
+			$("#gameDevTitle").velocity({
 				paddingTop: 20,
 				paddingBottom: 20
 			}, 200, "easeOutCubic");
 		}, function(){
 			$("#gameDevTitle").css("background-color", "transparent");
 
-			$("#gameDevTitle").animate({
+			$("#gameDevTitle").velocity({
 				paddingTop: 0,
 				paddingBottom: 0
 			}, 100, "easeOutCubic");
@@ -418,14 +448,14 @@
 		$("#historyDevTitle").hover(function(){
 			$("#historyDevTitle").css("background-color", "rgb(45, 42, 42)");
 
-			$("#historyDevTitle").animate({
+			$("#historyDevTitle").velocity({
 				paddingTop: 20,
 				paddingBottom: 20
 			}, 200, "easeOutCubic");
 		}, function(){
 			$("#historyDevTitle").css("background-color", "transparent");
 
-			$("#historyDevTitle").animate({
+			$("#historyDevTitle").velocity({
 				paddingTop: 0,
 				paddingBottom: 0
 			}, 100, "easeOutCubic");
@@ -434,14 +464,14 @@
 		$("#artDevTitle").hover(function(){
 			$("#artDevTitle").css("background-color", "rgb(45, 42, 42)");
 
-			$("#artDevTitle").animate({
+			$("#artDevTitle").velocity({
 				paddingTop: 20,
 				paddingBottom: 20
 			}, 200, "easeOutCubic");
 		}, function(){
 			$("#artDevTitle").css("background-color", "transparent");
 
-			$("#artDevTitle").animate({
+			$("#artDevTitle").velocity({
 				paddingTop: 0,
 				paddingBottom: 0
 			}, 100, "easeOutCubic");
@@ -451,7 +481,7 @@
 		setTimeout(loopInitTitle, 2000);
 
 		function loopInitTitle(){
-			$("#welcomeTitle").animate({
+			$("#welcomeTitle").velocity({
 				top: "-37%"
 			}, 400, function(){
 			$("#welcomeTitle").remove();
@@ -484,7 +514,7 @@
 			//Animate the header element to center
 			console.log("Element created");
 			loopTime = nextTitleTransition;
-			$("#welcomeTitle").animate({
+			$("#welcomeTitle").velocity({
 				top: "25%"
 			}, scrollCntrSpd, function(){
 				console.log("Animating Title");
@@ -515,7 +545,7 @@
 
 		function scrollTitleUp(){
 			console.log(loopPos);
-			$("#welcomeTitle").animate({
+			$("#welcomeTitle").velocity({
 				top: "-37%"
 			}, scrollTopSpd, function(){
 			$("#welcomeTitle").remove();
@@ -525,6 +555,21 @@
 				console.log("Finished Welcome Page Animation");
 				$("#welcomePage").fadeOut(500, function(){
 					canScroll = true;
+					//Manipulating blur effect
+					if(!mobile.matches){
+					$({blurRadius: 0}).animate({blurRadius: 5}, {
+        				duration: 500,
+        				easing: 'swing', // or "linear"
+                         // use jQuery UI or Easing plugin for more options
+        				step: function() {
+            				console.log(this.blurRadius);
+            				$('#pOverlay').css({
+                			"-webkit-filter": "blur("+this.blurRadius+"px)",
+                			"filter": "blur("+this.blurRadius+"px)"
+            				});
+        				}
+    				});
+					}
 				});
 			}
 		}
