@@ -174,6 +174,65 @@
 
 		/*-webkit-transform: skewY(.6deg);*/
 	}
+
+	.topNavs h1{
+		font-size: 5em;
+		color: white;
+		font-weight: 700;
+		font-family: 'Lato', sans-serif;
+
+	}
+
+	.topNavs li{
+		background: none;
+		padding: 0;
+		float: left;
+		width: auto;
+	}
+
+	.topNavs {
+		left: 5%;
+		position: absolute;
+		display: none;
+		margin: 0;
+		opacity: .9;
+	}
+
+	.sitesMade h1{
+		font-size: 1em;
+		color: white;
+		font-weight: 700;
+		font-family: 'Lato', sans-serif;
+
+	}
+
+	.sitesMade li{
+		background: none;
+		padding: 0;
+		/*float: left;
+		width: auto;*/
+	}
+
+	.sitesMade a{
+		text-decoration: inherit;
+	}
+
+	.sitesMade a:hover {
+		color: white;
+		text-decoration: underline;
+	}
+
+	.sitesMade {
+		position: absolute;
+		display: none;
+		opacity: .9;
+		margin:0;
+		left: 0;
+		right: 0;
+		top: 45%;
+
+	}
+
 	.spriteAnim{
 		position: absolute;
 	}
@@ -184,7 +243,7 @@
 		left: 0;
 		right: 0;
 		z-index: 3;
-		top: 90%;
+		top: 89%;
 		opacity: .6;
 	}
 	.aboutPage{
@@ -194,20 +253,19 @@
 		width: 100%;
 		font-family: 'Sorts Mill Goudy', serif;
 		font-size: 30;
+		background-image: url(images/dothatch.png);
 		/*padding-top: 5%;*/
 	}
 
 	.aStatement{
 		position: absolute;
-		top: 40%;
-		background: rgb(45, 42, 42);
+		top: 0%;
 		opacity: .9;
 		color: white;
-		margin-left: auto;
-		margin-right: auto;
 		left: 0;
 		right: 0;
-		width: 50%;
+		width: 100%;
+		height: 100%;
 		display: none;
 		text-align: center;
 	}
@@ -264,6 +322,14 @@
 		width: 100%;
 		height: 10%;
 		z-index: 3;
+		opacity: .9;
+	}
+
+	.video{
+		width: 100%;
+		height: 110%;
+		opacity: .7;
+		/*opacity: .7*/;
 	}
 
 	body{
@@ -323,7 +389,11 @@
 	</div>
 </div>
 <div class="header" id="pOverlay">
-	<!-- <img class="gradient_test" id="gradient_test" src="images/hexagon_overlay.png"> -->
+	<div class="topNavs" id="topNavs">
+		<ul>	
+			<li id="gameDevNav"><h1>[webdev]</h1></li>
+		</ul>
+	</div>
 </div>
 <div  class="content">
 	<h1  id="name-waypoint" class="nameWrapper"> Eric Smith </h1>
@@ -351,7 +421,7 @@
 	</ul>
 	<!-- <img class="spriteAnim" src="images/NoraRedesignTransparent.png"> -->
 	</div>
-	<img class="toNextPage" src="images/down128white.png">
+	<img class="toNextPage" id="toNextPage" src="images/down128white.png">
 	<div class="leftNav" id="leftNav">
 			<table>
 				<tr>
@@ -380,6 +450,15 @@
 	</div>
 	<div id="aboutPage" class="aboutPage">
 			<div class="aStatement" id="aStatement">
+				<img class="video" src="images/bruceLee.gif">
+			</div>
+			<div class="sitesMade" id="sitesMade">
+				<ul>
+					<li><a target="_blank" href="http://seanavery.herokuapp.com"><h1> EmoFunk Launch </h1></a></li>
+					<li><a target="_blank" href="http://thetreehousefilm.com"><h1> TheTreeHouseFilm Launch and Review </h1></a></li>
+					<li><a target="_blank" href="http://metobs.ssec.wisc.edu/aoss/gps/"><h1> GAMIS Monitoring Image Viewer </h1></a></li>
+					<li><a target="_blank" href="http://metobs.ssec.wisc.edu/aoss/gps/"><h1> CRIS Instrument Image Viewer </h1></a></li>
+				<ul>
 			</div>
 	</div> 
 </div>
@@ -673,6 +752,9 @@
 	 		//Hide the navigation panel
 	    	//$('#leftNav').fadeOut(200);
 	    	$('#aStatement').fadeOut(200);
+	    	$('#topNavs').fadeOut(400);
+	    	$('#sitesMade').fadeOut(400);
+
 	 		$('html,body').animate({
 	        	scrollTop: 0
 	    	}, 1200, function(){
@@ -692,6 +774,18 @@
 	    		canCheckMouse = true;
 	    		pageState = 0;
 	    		//Fade the Titles In
+	    		$({blurRadius: 5}).animate({blurRadius: 5}, {
+        				duration: 500,
+        				easing: 'swing', // or "linear"
+                         // use jQuery UI or Easing plugin for more options
+        				step: function() {
+            				console.log(this.blurRadius);
+            				$('#pOverlay').css({
+                			"-webkit-filter": "blur("+this.blurRadius+"px)",
+                			"filter": "blur("+this.blurRadius+"px)"
+            				});
+        				}
+    				});
 	    		fadeInTitle();
 	    	});
 	    	console.log("Finished Scroll");
@@ -709,6 +803,7 @@
        // if(waypointNameHit == false)
  		//{
  			console.log("Scrolling Down");
+ 			$('#toNextPage').fadeOut(200);
  			var p = $('#aboutPage').position();
  			$('html,body').animate({
 	        	scrollTop: 430
@@ -722,14 +817,28 @@
 	    	}, 1200)*/
 	    	$('#pOverlay').animate({
 	    		//Change to 10% for banner effect
-	    		height: "10%",
+	    		height: "0%",
 	    		backgroundPositionY: -400
 	    	}, 1200,  function(){
 	    		waypointNameHit = true;
 	    		canCheckMouse = true;
 	    		//Display the navigation panel
-	    		//$('#leftNav').fadeTo('slow', .5);
+	    		$({blurRadius: 5}).animate({blurRadius: 0}, {
+        				duration: 500,
+        				easing: 'swing', // or "linear"
+                         // use jQuery UI or Easing plugin for more options
+        				step: function() {
+            				console.log(this.blurRadius);
+            				$('#pOverlay').css({
+                			"-webkit-filter": "blur("+this.blurRadius+"px)",
+                			"filter": "blur("+this.blurRadius+"px)"
+            				});
+        				}
+    				});
+	    		var topNav = document.getElementById
+	    		$('#topNavs').fadeIn(200);
 	    		$('#aStatement').fadeTo('slow', .9);
+	    		$('#sitesMade').fadeIn(200);
 	    		pageState = 1;	
 	    	});
 	    	$("#aboutPage").animate({
@@ -767,6 +876,7 @@ function fadeInTitle(){
 	//{
 		$('#titles').fadeTo('1200', .9);
 		$("#name-waypoint").fadeIn(600);
+		$('#toNextPage').fadeIn(200);
 		//$('#titles').fadeIn(1200);
 	//}
 }
