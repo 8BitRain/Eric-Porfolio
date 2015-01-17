@@ -8,6 +8,7 @@
 <script src="plugins/jquery-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/velocity/1.2.1/velocity.min.js"></script>
 
+<!DOCTYPE html>
 <head>
 <style type="text/css">
 	/*Responsive design :D*/
@@ -256,7 +257,7 @@
 		opacity: .6;
 		cursor: pointer;
 	}
-	.aboutPage{
+	.webdevPage{
 		position: absolute;
 		top: 100%;
 		height: 100%;
@@ -360,8 +361,28 @@
 		.toNextPage{
 			top: 87%;
 		}
-		.video{
-			margin-top: 5%;
+		.webdevPage{
+			top: 50%;
+		}
+	}
+	/* 1000 x 550 "Minimized Screen"*/
+	@media screen and (max-width: 1000px) , (max-height: 550px){
+		.toNextPage{
+			top: 88%;
+			height: 15%
+		}
+
+		.titles{
+			font-size: .9em;
+		}
+		.welcomePage {
+    		font-size: .5em;
+  		}
+  		.nameWrapper{
+  			font-size: 1.5em;
+  		}
+		.webdevPage{
+			top: 50%;
 		}
 	}
 	/*Media Queries for Mobile iPhones */
@@ -467,7 +488,7 @@
 				</tr>
 			</table>
 	</div>
-	<div id="aboutPage" class="aboutPage">
+	<div id="webdevPage" class="webdevPage">
 			<div class="aStatement" id="aStatement">
 				<img class="video" src="images/bruceLee.gif">
 			</div>
@@ -492,6 +513,7 @@
 
 <script>
 	console.log("Width of the current web browser viewport: " + $(window).width());
+	console.log("Height of the current web browser viewport: " + $(window).height());
 	var fixPosition = false;
 	var initScroll = false;
 	var initHeight = 500;
@@ -825,7 +847,7 @@
  		//{
  			console.log("Scrolling Down");
  			$('#toNextPage').fadeOut(200);
- 			var p = $('#aboutPage').position();
+ 			var p = $('#webdevPage').position();
  			$('html,body').animate({
 	        	scrollTop: 430
 	    	}, 1200,  function(){
@@ -862,9 +884,18 @@
 	    		$('#sitesMade').fadeIn(200);
 	    		pageState = 1;	
 	    	});
-	    	$("#aboutPage").animate({
+	    	//Responsive desigin for 1366 by 768
+	    	if($(window).width() == 1366){
+	    		$("#webdevPage").animate({
+	 				top: "50%"
+	 			}, 1200);
+	    	}
+	    	else{
+	    		$("#webdevPage").animate({
 	 				top: "40%"
 	 			}, 1200);
+	    	}
+	    	
 	    	/*$("#gFlies").animate({
 	 				marginBottom: "50%"
 	 			}, 1200);*/
@@ -1000,7 +1031,7 @@ $('#toNextPage').click(function(e){
     }
 })(jQuery);
 </script>
-
+</html>
 
 <!-- Example code -->
 <!--
