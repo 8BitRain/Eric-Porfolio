@@ -524,6 +524,7 @@
 	var isWelcomeAnimDone = false;
 	//Relates to whether or not we can scroll at all.
 	var canScroll = false;
+	var hitNextButton1 = false;
 
 	//Page state defines what page the user is currently at. 0 represents the landing page
 	var pageState = 0;
@@ -540,6 +541,7 @@
 
 	//Hovering Cover Page Links
 	$(document).ready(function(){
+		//padding vars as determined by screenHeight
 		$("#webDevTitle").hover(function(){
 			$("#webDevTitle").css("background-color", "rgb(45, 42, 42)");
 			$("#webDevTitle").velocity({
@@ -777,6 +779,7 @@
 
  function parallax_scroll(e){
  	//Process pass in the object e.
+ 	console.log("What's e: " + e.originalEvent.detail);
  	console.log("Can we check mouse wheel?: " + canCheckMouse);
  	var x = document.getElementsByTagName("BODY")[0];
  	x.style.overflow = "hidden";
@@ -840,7 +843,7 @@
  		console.log("Value of waypointNameHit: " + waypointNameHit);
  		console.log("Value of mousewheel" + e.originalEvent.wheelDelta);
     }
-    else if((e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0) && pageState == 0)
+    else if((e.originalEvent.wheelDelta < 0 || e.originalEvent.detail > 0 || hitNextButton1 == true) && pageState == 0)
     {
     	canCheckMouse = false;
        // if(waypointNameHit == false)
@@ -934,7 +937,7 @@ function fadeInTitle(){
 }
 
 //Handles the events for Chrome/Safari. They both use -webkit
-$(window).on('mousewheel DOMMouseScroll', function(e){
+$(window).on('mousewheel DOMMouseScroll wheel', function(e){
 	if(canScroll){
 	 	if(pageState == 0)
 	 	{
@@ -962,10 +965,11 @@ $(window).on('mousewheel DOMMouseScroll', function(e){
 
 });
 //Handle moving on to nextPage if the user clicks waypoint
-$('#toNextPage').click(function(e){
+$('#toNextPage').on('click', function(e){
 	if(canScroll){
 		fadeOutTitle();
 		parallax_scroll(e);
+		hitNextButton1 = true;
 	  }
 });
 
